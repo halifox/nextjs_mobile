@@ -1,20 +1,19 @@
 'use client';
 import {useEffect, useState} from "react";
 import axios from "axios";
-import {useSearchParams} from 'next/navigation';
+import {useRouter, useSearchParams} from 'next/navigation';
 import {Carousel, Typography} from "antd";
 import Image from "next/image";
 import {CommentSection} from 'react-comments-section';
 import InfiniteScroll from 'react-infinite-scroll-component'
 import '@/styles/react-comments.css';
 
-const {Title, Paragraph} = Typography;
-
 export default function Home() {
     const [data, setData] = useState();
     const [commentData, setCommentData] = useState();
     const [comments, setComments] = useState([]);
 
+    const router = useRouter();
     const searchParams = useSearchParams();
     const source_note_id = searchParams.get('source_note_id')
     const xsec_token = searchParams.get('xsec_token')
@@ -60,8 +59,8 @@ export default function Home() {
                     )
                 })}
             </Carousel>
-            <Title level={3} style={{padding: 16, paddingBottom: 0, whiteSpace: 'pre-line'}}>{data?.title}</Title>
-            <Paragraph style={{padding: 16, paddingTop: 0, whiteSpace: 'pre-line'}}>{data?.desc}</Paragraph>
+            <Typography.Title level={4} style={{padding: 8, paddingBottom: 0, whiteSpace: 'pre-line'}}>{data?.title}</Typography.Title>
+            <Typography.Paragraph style={{padding: 8, paddingTop: 0, whiteSpace: 'pre-line'}}>{data?.desc}</Typography.Paragraph>
             <InfiniteScroll
                 dataLength={comments.length}
                 next={comment}

@@ -7,7 +7,6 @@ import {CommentSection} from "react-comments-section";
 import InfiniteScroll from "react-infinite-scroll-component";
 import '@/styles/react-comments.css';
 
-const {Title, Text, Paragraph} = Typography;
 export default function Home() {
     const [url, setUrl] = useState();
     const [data, setData] = useState();
@@ -64,17 +63,19 @@ export default function Home() {
     return (
         <div>
             <video controls src={url} width="1280" height="720"/>
-            <Title level={3} style={{padding: 16, paddingBottom: 0, whiteSpace: 'pre-line'}}>{data?.title}</Title>
-            <Paragraph style={{padding: 16, paddingTop: 0, whiteSpace: 'pre-line'}}>{data?.desc}</Paragraph>
+            <Typography.Title level={4} style={{padding: 8, whiteSpace: 'pre-line'}}>{data?.title}</Typography.Title>
+            <Typography.Paragraph style={{padding: 8, paddingTop: 0, whiteSpace: 'pre-line'}}>{data?.desc}</Typography.Paragraph>
             <List
                 grid={{gutter: 0, column: 1}}
                 style={{padding: 4}}
                 dataSource={data?.pages}
                 renderItem={item => (
-                    <List.Item key={item.cid} style={{padding: 4, marginBlockEnd: 0}} onClick={() => {
-                        window.location.replace(`/bilibili/video?id=${id}&cid=${item.cid}`)
-                    }}>
-                        <Button>
+                    <List.Item key={item.cid} style={{padding: 4, marginBlockEnd: 0}}>
+                        <Button
+                            style={{width: '100%', wordWrap: 'break-word', whiteSpace: 'normal', height: 'auto'}}
+                            type={item.cid == cid ? 'primary' : 'default'}
+                            onClick={() => item.cid == cid ? null : window.location.replace(`/bilibili/video?id=${id}&cid=${item.cid}`)}
+                        >
                             {item.part}
                         </Button>
                     </List.Item>

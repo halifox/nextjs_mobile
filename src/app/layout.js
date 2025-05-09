@@ -27,7 +27,8 @@ export default function RootLayout({children}) {
             display: 'flex',
             justifyContent: 'center',
             height: '100vh',
-            width: '61vh',
+            width: '100%',
+            maxWidth: '60vh',
         }}>
             <AntdRegistry>
                 <ThemeProvider>
@@ -36,9 +37,7 @@ export default function RootLayout({children}) {
                             algorithm: isDarkMode ? antdTheme.darkAlgorithm : antdTheme.defaultAlgorithm,
                         }}
                     >
-                        <App style={{
-                            width: '100%',
-                        }}>
+                        <App style={{width: '100%',}}>
                             <Suspense>
                                 {children}
                             </Suspense>
